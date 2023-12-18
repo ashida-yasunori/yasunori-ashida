@@ -1,4 +1,4 @@
--- depends_on: {{ ref('tbl_lake_trend_energy_ac_10min') }}
+-- depends_on: {{ ref('tbl_lake_trend_energy_ac') }}
 {{-
     config(
         materialized='incremental',

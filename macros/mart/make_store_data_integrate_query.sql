@@ -13,9 +13,8 @@ with integration as (
         (select t1.store_id, t1.log_id, t1.item_index, t1.value, t1.value_at, {{ time }} as time 
         {%- set tbl_name = get_table_name(group[0], time) %}
         from {{ tbl_name }} t1
-        inner join (select store_id, min(log_last_min_at) as log_last_min_at, max(log_last_max_at) as log_last_max_at
-                    from db_common.public.tbl_sync_log 
-                    group by store_id, process_kbn) t2 on (
+        inner join (select store_id, log_last_min_at, log_last_max_at
+                    from db_common.public.tbl_sync_log) t2 on (
                     ( t2.store_id = t1.store_id and (t2.log_last_min_at <= t1.value_at and t1.value_at <= t2.log_last_max_at)))
         where t1.store_id = {{ store_id }})
         {%- if not loop.last %}

@@ -9,9 +9,13 @@ with query1 as (
      t1.item_index,
      t1.value,
      t1.value_at,
-     DATEADD(minute, -10, t1.value_at) as value_at_past_10min
+     DATEADD(minute, -1, t1.value_at) as value_at_past_1min
  from 
-     {{ ref('tbl_lake_' ~ trend ~ '_10min') }} t1
+     {% if trend == 'energy_pv' -%}
+       db_raw.public.tbl_raw_{{ trend }} t1
+     {% else -%}
+       db_lake.public.tbl_lake_{{ trend }} t1
+     {% endif %}
 {{ make_inner_join_sync_log(time_unit) -}}
 ),
 
@@ -22,11 +26,11 @@ query2 as (
      t1.item_index,
      t1.value,
      t1.value_at,
-     year(t1.value_at_past_10min) as value_at_year,
-     month(t1.value_at_past_10min) as value_at_month,
-     day(t1.value_at_past_10min) as value_at_day,
-     hour(t1.value_at_past_10min) as value_at_hour,
-     minute(t1.value_at_past_10min) as value_at_min
+     year(t1.value_at_past_1min) as value_at_year,
+     month(t1.value_at_past_1min) as value_at_month,
+     day(t1.value_at_past_1min) as value_at_day,
+     hour(t1.value_at_past_1min) as value_at_hour,
+     minute(t1.value_at_past_1min) as value_at_min
  from 
      query1 t1
 )
@@ -36,7 +40,8 @@ select
     log_id,
     item_index,
     sum(value) as value,
-    max(value_at) as value_at
+    max(value_at) as value_at,
+    to_timestamp(CURRENT_TIMESTAMP()) as last_updated_at
 from
     query2
 group by

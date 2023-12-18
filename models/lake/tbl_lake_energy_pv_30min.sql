@@ -1,4 +1,3 @@
--- depends_on: {{ ref('tbl_lake_energy_pv_10min') }}
 {{-
     config(
         materialized='incremental',

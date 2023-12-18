@@ -7,7 +7,17 @@
         {% set result = 'db_lake.public.tbl_lake_' ~ trend ~ '_' ~ time_unit ~ 'min' %}
     {% endif %}
 {% elif trend in ['ocs', 'trend_energy_ac', 'energy_ac', 'energy_pv', 'statuslog', 'switchlog'] %}
-    {% set result = 'db_lake.public.tbl_lake_' ~ trend ~'_' ~ time_unit ~ 'min' %}
+    {% if time_unit == 10 %}
+        {% set result = 'db_lake.public.tbl_lake_' ~ trend %}
+    {% else %}
+        {% set result = 'db_lake.public.tbl_lake_' ~ trend ~'_' ~ time_unit ~ 'min' %}
+    {% endif %}
+{% elif trend == 'energy_pv' %}
+    {% if time_unit == 1 %}
+        {% set result = 'db_raw.public.tbl_raw_' ~ trend %}
+    {% else %}
+        {% set result = 'db_lake.public.tbl_lake_' ~ trend ~ '_' ~ time_unit ~ 'min' %}
+    {% endif %}
 {% endif%}
 {{ return(result) }}
 {% endmacro %}

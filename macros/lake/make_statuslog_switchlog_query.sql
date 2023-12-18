@@ -9,6 +9,7 @@ select
      t1.item_index,
      t1.value,
      t1.value_at,
+     DATEADD(second, 59, t1.value_at) as value_at_add_59sec,
      year(DATEADD(second, 59, t1.value_at)) as value_at_year,
      month(DATEADD(second, 59, t1.value_at)) as value_at_month,
      day(DATEADD(second, 59, t1.value_at)) as value_at_day,
@@ -24,7 +25,8 @@ select
      store_id,
      log_id,
      item_index,
-     max(value_at) value_at_max
+     max(value_at) value_at_max,
+     max(value_at_add_59sec) as value_at_add_59sec
 from 
      query1
 group by 
@@ -35,15 +37,16 @@ select
     t1.store_id,
     t1.log_id,
     t1.item_index,
-    t2.value,
+    to_varchar(t2.value) as value,
     TIMESTAMP_FROM_PARTS(
-       Year(value_at_max), 
-       Month(value_at_max), 
-       DAY(value_at_max), 
-       Hour(value_at_max), 
-       MINUTE(value_at_max),
+       Year(t1.value_at_add_59sec), 
+       Month(t1.value_at_add_59sec), 
+       DAY(t1.value_at_add_59sec), 
+       Hour(t1.value_at_add_59sec), 
+       MINUTE(t1.value_at_add_59sec),
        0
-    ) as value_at
+    ) as value_at,
+    to_timestamp(CURRENT_TIMESTAMP()) as last_updated_at
 from 
     query2 t1
 left join query1 t2 on 

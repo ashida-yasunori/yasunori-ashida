@@ -8,11 +8,12 @@ select
      t1.log_id,
      t1.item_index,
      t1.value,
-     t1.value_at,
-     DATEADD(minute, -10, t1.value_at) as value_at_past_10min
+     t1.value_at
 from 
      {{ 'db_raw.public.tbl_raw_' ~ trend ~ ' t1' }}
 {{ make_inner_join_sync_log(time_unit) -}}
+where
+     t1.value_at <> (select min(value_at) from {{ 'db_raw.public.tbl_raw_' ~ trend }})
 ),
 
 query2 as (
@@ -44,7 +45,8 @@ select
   log_id,
   item_index,
   value,
-  to_timestamp(value_at) as value_at
+  to_timestamp(value_at) as value_at,
+  to_timestamp(CURRENT_TIMESTAMP()) as last_updated_at
 from 
   query2
 order by 

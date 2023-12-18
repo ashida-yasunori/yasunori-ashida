@@ -35,8 +35,9 @@ select
     store_id,
     log_id,
     item_index,
-    round(avg(value), {{ get_significant_digits(trend) }}, 'HALF_AWAY_FROM_ZERO') as value,
-    to_timestamp(max(value_at)) as value_at
+    round(avg(value)::NUMBER(15,5), {{ get_significant_digits(trend) }}, 'HALF_AWAY_FROM_ZERO') as value,
+    to_timestamp(max(value_at)) as value_at,
+    to_timestamp(CURRENT_TIMESTAMP()) as last_updated_at
 from
     trend2
 group by
