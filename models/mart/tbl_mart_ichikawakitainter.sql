@@ -37,8 +37,8 @@
     config(
         database=db_name,
         materialized='incremental',
-        pre_hook=['{{ make_delete_store_integrate_data_query(store_id) }}' ],
-        post_hook=['{{ make_delete_synclog_query(store_id) }}' ]
+        pre_hook=['{{ make_delete_store_integrate_data_query(57964) }}' ],
+        post_hook=['{{ make_delete_synclog_query(57964) }}' ]
     )
 }}
 
