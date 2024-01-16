@@ -1,0 +1,60 @@
+version: 2
+
+macros:
+  - name: get_significant_digits
+    description: "トレンドログ毎平均計算時有効少数桁数を返す"
+    arguments:
+      - name: trend
+        description: "トレンドグループ名"
+        type: "TEXT"
+  - name: make_aggregate_average_query
+    description: "1分 or 5分単位トレンドログ（温度、湿度、照度など）の時間単位集約クエリを返す。値は平均値"
+    arguments:
+      - name: trend
+        description: "トレンドグループ名"
+        type: "TEXT"
+      - name: time_unit
+        description: "集約時間単位。10 or 30 or 60"
+        type: "NUMBER"
+  - name: make_aggregate_latest_value_query
+    description: "設定変更時生成トレンドログ(statuslog, switchlog)の1分単位集約クエリを返す。値は時間内の最後の値"
+    arguments:
+      - name: trend
+        description: "トレンドグループ名"
+        type: "TEXT"
+  - name: make_aggregate_max_query
+    description: "1分 or 5分 or 10分単位トレンドログ（瞬時電力）の時間集約クエリを返す。値は時間内の最大値"
+    arguments:
+      - name: trend
+        description: "トレンドグループ名"
+        type: "TEXT"
+      - name: time_unit
+        description: "集約時間単位。10 or 30 or 60"
+        type: "NUMBER"
+  - name: make_aggregate_sum_query
+    description: "5分 or 10分単位積算値トレンドログ（電力、ドア開閉）の時間集約クエリを返す。値は時間内の合計値"
+    arguments:
+      - name: trend
+        description: "トレンドグループ名"
+        type: "TEXT"
+      - name: time_unit
+        description: "集約時間単位。30 or 60"
+        type: "NUMBER"
+  - name: make_diff_query
+    description: "5分 or 10分単位積算値トレンドログ（電力、ドア開閉）の差分計算クエリを返す"
+    arguments:
+      - name: trend
+        description: "トレンドグループ名"
+        type: "TEXT"
+      - name: time_unit
+        description: "集約時間単位。10固定"
+        type: "NUMBER"
+  - name: make_inner_join_sync_log
+    description: "tbl_sync_logテーブルの内容で変換処理対象データを限定するためのinner join句を返す"
+    arguments:
+      - name: trend
+        description: "トレンドグループ名"
+        type: "TEXT"
+      - name: time_unit
+        description: "集約時間単位。10 or 30 or 60"
+        type: "NUMBER"

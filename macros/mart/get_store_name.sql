@@ -1,11 +1,11 @@
 {# tbl_mst_storeから店舗名を取得するマクロ #}
 {% macro get_store_name(store_id) %}
-
+{% set db_suffix = '_stg' if target.name == 'stg' else '' %}
 {% set query %}
 select
     store_name
 from 
-    db_common.public.tbl_mst_store
+    db_common{{db_siffix}}.public.tbl_mst_store
 where
     store_id = {{ store_id }}
 {% endset %}

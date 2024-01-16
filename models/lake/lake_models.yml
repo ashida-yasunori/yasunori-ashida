@@ -1,0 +1,1053 @@
+version: 2
+
+models:
+  - name: tbl_lake_co2_10min
+    description: "Co2データを10分単位にまとめたデータを格納するテーブル"
+    config:
+      materialized: incremental
+      unique_key: 'store_id, log_id, item_index, value_at'
+    columns:
+      - name: store_id
+        description: 店舗ID
+        tests:
+          - not_null
+      - name: log_id
+        description: ログID
+        tests:
+          - not_null
+      - name: item_index
+        description: アイテム番号
+        tests:
+          - not_null
+      - name: value
+        description: 計測値の10分間の平均値
+        tests:
+          - not_null
+      - name: value_at
+        description: 計測日時
+        tests:
+          - not_null
+      - name: last_updated_at
+        description: 最終更新日時
+        tests:
+          - not_null
+  - name: tbl_lake_co2_30min
+    description: "Co2データを30分単位にまとめたデータを格納するテーブル"
+    config:
+      materialized: incremental
+      unique_key: 'store_id, log_id, item_index, value_at'
+    columns:
+      - name: store_id
+        description: 店舗ID
+        tests:
+          - not_null
+      - name: log_id
+        description: ログID
+        tests:
+          - not_null
+      - name: item_index
+        description: アイテム番号
+        tests:
+          - not_null
+      - name: value
+        description: 計測値の30分間の平均値
+        tests:
+          - not_null
+      - name: value_at
+        description: 計測日時
+        tests:
+          - not_null
+      - name: last_updated_at
+        description: 最終更新日時
+        tests:
+          - not_null
+  - name: tbl_lake_co2_60min
+    description: "Co2データを60分単位にまとめたデータを格納するテーブル"
+    config:
+      materialized: incremental
+      unique_key: 'store_id, log_id, item_index, value_at'
+    columns:
+      - name: store_id
+        description: 店舗ID
+        tests:
+          - not_null
+      - name: log_id
+        description: ログID
+        tests:
+          - not_null
+      - name: item_index
+        description: アイテム番号
+        tests:
+          - not_null
+      - name: value
+        description: 計測値の60分間の平均値
+        tests:
+          - not_null
+      - name: value_at
+        description: 計測日時
+        tests:
+          - not_null
+      - name: last_updated_at
+        description: 最終更新日時
+        tests:
+          - not_null
+  - name: tbl_lake_energy_ac
+    description: "受電電力量データの差分値データを格納するテーブル。受電電力量データの元の値は積算値"
+    config:
+      materialized: incremental
+      unique_key: 'store_id, log_id, item_index, value_at'
+    columns:
+      - name: store_id
+        description: 店舗ID
+        tests:
+          - not_null
+      - name: log_id
+        description: ログID
+        tests:
+          - not_null
+      - name: item_index
+        description: アイテム番号
+        tests:
+          - not_null
+      - name: value
+        description: 積算値から差分を求めた値
+        tests:
+          - not_null
+      - name: value_at
+        description: 計測日時
+        tests:
+          - not_null
+      - name: last_updated_at
+        description: 最終更新日時
+        tests:
+          - not_null
+  - name: tbl_lake_energy_ac_30min
+    description: "受電電力量データを30分単位にまとめたデータを格納するテーブル"
+    config:
+      materialized: incremental
+      unique_key: 'store_id, log_id, item_index, value_at'
+    columns:
+      - name: store_id
+        description: 店舗ID
+        tests:
+          - not_null
+      - name: log_id
+        description: ログID
+        tests:
+          - not_null
+      - name: item_index
+        description: アイテム番号
+        tests:
+          - not_null
+      - name: value
+        description: 差分値の30分間の合計値
+        tests:
+          - not_null
+      - name: value_at
+        description: 計測日時
+        tests:
+          - not_null
+      - name: last_updated_at
+        description: 最終更新日時
+        tests:
+          - not_null
+  - name: tbl_lake_energy_ac_60min
+    description: "受電電力量データを60分単位にまとめたデータを格納するテーブル"
+    config:
+      materialized: incremental
+      unique_key: 'store_id, log_id, item_index, value_at'
+    columns:
+      - name: store_id
+        description: 店舗ID
+        tests:
+          - not_null
+      - name: log_id
+        description: ログID
+        tests:
+          - not_null
+      - name: item_index
+        description: アイテム番号
+        tests:
+          - not_null
+      - name: value
+        description: 差分値の60分間の合計値
+        tests:
+          - not_null
+      - name: value_at
+        description: 計測日時
+        tests:
+          - not_null
+      - name: last_updated_at
+        description: 最終更新日時
+        tests:
+          - not_null
+  - name: tbl_lake_energy_pv_10min
+    description: "瞬時電力データの10分単位データを格納するテーブル"
+    config:
+      materialized: incremental
+      unique_key: 'store_id, log_id, item_index, value_at'
+    columns:
+      - name: store_id
+        description: 店舗ID
+        tests:
+          - not_null
+      - name: log_id
+        description: ログID
+        tests:
+          - not_null
+      - name: item_index
+        description: アイテム番号
+        tests:
+          - not_null
+      - name: value
+        description: 10分間の瞬時電力の最大値
+        tests:
+          - not_null
+      - name: value_at
+        description: 計測日時
+        tests:
+          - not_null
+      - name: last_updated_at
+        description: 最終更新日時
+        tests:
+          - not_null
+  - name: tbl_lake_energy_pv_30min
+    description: "瞬時電力データの30分単位データを格納するテーブル"
+    config:
+      materialized: incremental
+      unique_key: 'store_id, log_id, item_index, value_at'
+    columns:
+      - name: store_id
+        description: 店舗ID
+        tests:
+          - not_null
+      - name: log_id
+        description: ログID
+        tests:
+          - not_null
+      - name: item_index
+        description: アイテム番号
+        tests:
+          - not_null
+      - name: value
+        description: 30分間の瞬時電力の最大値
+        tests:
+          - not_null
+      - name: value_at
+        description: 計測日時
+        tests:
+          - not_null
+      - name: last_updated_at
+        description: 最終更新日時
+        tests:
+          - not_null
+  - name: tbl_lake_energy_pv_60min
+    description: "受電電力量データを60分単位にまとめたデータを格納するテーブル"
+    config:
+      materialized: incremental
+      unique_key: 'store_id, log_id, item_index, value_at'
+    columns:
+      - name: store_id
+        description: 店舗ID
+        tests:
+          - not_null
+      - name: log_id
+        description: ログID
+        tests:
+          - not_null
+      - name: item_index
+        description: アイテム番号
+        tests:
+          - not_null
+      - name: value
+        description: 60分間の瞬時電力の最大値
+        tests:
+          - not_null
+      - name: value_at
+        description: 計測日時
+        tests:
+          - not_null
+      - name: last_updated_at
+        description: 最終更新日時
+        tests:
+          - not_null
+  - name: tbl_lake_humi_10min
+    description: "湿度データを10分単位にまとめたデータを格納するテーブル"
+    config:
+      materialized: incremental
+      unique_key: 'store_id, log_id, item_index, value_at'
+    columns:
+      - name: store_id
+        description: 店舗ID
+        tests:
+          - not_null
+      - name: log_id
+        description: ログID
+        tests:
+          - not_null
+      - name: item_index
+        description: アイテム番号
+        tests:
+          - not_null
+      - name: value
+        description: 計測値の10分間の平均値
+        tests:
+          - not_null
+      - name: value_at
+        description: 計測日時
+        tests:
+          - not_null
+      - name: last_updated_at
+        description: 最終更新日時
+        tests:
+          - not_null
+  - name: tbl_lake_humi_30min
+    description: "湿度データを30分単位にまとめたデータを格納するテーブル"
+    config:
+      materialized: incremental
+      unique_key: 'store_id, log_id, item_index, value_at'
+    columns:
+      - name: store_id
+        description: 店舗ID
+        tests:
+          - not_null
+      - name: log_id
+        description: ログID
+        tests:
+          - not_null
+      - name: item_index
+        description: アイテム番号
+        tests:
+          - not_null
+      - name: value
+        description: 計測値の30分間の平均値
+        tests:
+          - not_null
+      - name: value_at
+        description: 計測日時
+        tests:
+          - not_null
+      - name: last_updated_at
+        description: 最終更新日時
+        tests:
+          - not_null
+  - name: tbl_lake_humi_60min
+    description: "湿度データを60分単位にまとめたデータを格納するテーブル"
+    config:
+      materialized: incremental
+      unique_key: 'store_id, log_id, item_index, value_at'
+    columns:
+      - name: store_id
+        description: 店舗ID
+        tests:
+          - not_null
+      - name: log_id
+        description: ログID
+        tests:
+          - not_null
+      - name: item_index
+        description: アイテム番号
+        tests:
+          - not_null
+      - name: value
+        description: 計測値の60分間の平均値
+        tests:
+          - not_null
+      - name: value_at
+        description: 計測日時
+        tests:
+          - not_null
+      - name: last_updated_at
+        description: 最終更新日時
+        tests:
+          - not_null
+  - name: tbl_lake_lux_10min
+    description: "照度データを10分単位にまとめたデータを格納するテーブル"
+    config:
+      materialized: incremental
+      unique_key: 'store_id, log_id, item_index, value_at'
+    columns:
+      - name: store_id
+        description: 店舗ID
+        tests:
+          - not_null
+      - name: log_id
+        description: ログID
+        tests:
+          - not_null
+      - name: item_index
+        description: アイテム番号
+        tests:
+          - not_null
+      - name: value
+        description: 計測値の10分間の平均値
+        tests:
+          - not_null
+      - name: value_at
+        description: 計測日時
+        tests:
+          - not_null
+      - name: last_updated_at
+        description: 最終更新日時
+        tests:
+          - not_null
+  - name: tbl_lake_lux_30min
+    description: "照度データを30分単位にまとめたデータを格納するテーブル"
+    config:
+      materialized: incremental
+      unique_key: 'store_id, log_id, item_index, value_at'
+    columns:
+      - name: store_id
+        description: 店舗ID
+        tests:
+          - not_null
+      - name: log_id
+        description: ログID
+        tests:
+          - not_null
+      - name: item_index
+        description: アイテム番号
+        tests:
+          - not_null
+      - name: value
+        description: 計測値の30分間の平均値
+        tests:
+          - not_null
+      - name: value_at
+        description: 計測日時
+        tests:
+          - not_null
+      - name: last_updated_at
+        description: 最終更新日時
+        tests:
+          - not_null
+  - name: tbl_lake_lux_60min
+    description: "照度データを60分単位にまとめたデータを格納するテーブル"
+    config:
+      materialized: incremental
+      unique_key: 'store_id, log_id, item_index, value_at'
+    columns:
+      - name: store_id
+        description: 店舗ID
+        tests:
+          - not_null
+      - name: log_id
+        description: ログID
+        tests:
+          - not_null
+      - name: item_index
+        description: アイテム番号
+        tests:
+          - not_null
+      - name: value
+        description: 計測値の60分間の平均値
+        tests:
+          - not_null
+      - name: value_at
+        description: 計測日時
+        tests:
+          - not_null
+      - name: last_updated_at
+        description: 最終更新日時
+        tests:
+          - not_null
+  - name: tbl_lake_ocs
+    description: "ドア開閉回数・開時間データの差分値データを格納するテーブル。ドア開閉回数・開時間データの元の値は積算値"
+    config:
+      materialized: incremental
+      unique_key: 'store_id, log_id, item_index, value_at'
+    columns:
+      - name: store_id
+        description: 店舗ID
+        tests:
+          - not_null
+      - name: log_id
+        description: ログID
+        tests:
+          - not_null
+      - name: item_index
+        description: アイテム番号
+        tests:
+          - not_null
+      - name: value
+        description: 積算値から差分を求めた値
+        tests:
+          - not_null
+      - name: value_at
+        description: 計測日時
+        tests:
+          - not_null
+      - name: last_updated_at
+        description: 最終更新日時
+        tests:
+          - not_null
+  - name: tbl_lake_ocs_30min
+    description: "ドア開閉回数・開時間データを30分単位にまとめたデータを格納するテーブル"
+    config:
+      materialized: incremental
+      unique_key: 'store_id, log_id, item_index, value_at'
+    columns:
+      - name: store_id
+        description: 店舗ID
+        tests:
+          - not_null
+      - name: log_id
+        description: ログID
+        tests:
+          - not_null
+      - name: item_index
+        description: アイテム番号
+        tests:
+          - not_null
+      - name: value
+        description: 差分値の30分間の合計値
+        tests:
+          - not_null
+      - name: value_at
+        description: 計測日時
+        tests:
+          - not_null
+      - name: last_updated_at
+        description: 最終更新日時
+        tests:
+          - not_null
+  - name: tbl_lake_ocs_60min
+    description: "ドア開閉回数・開時間データを60分単位にまとめたデータを格納するテーブル"
+    config:
+      materialized: incremental
+      unique_key: 'store_id, log_id, item_index, value_at'
+    columns:
+      - name: store_id
+        description: 店舗ID
+        tests:
+          - not_null
+      - name: log_id
+        description: ログID
+        tests:
+          - not_null
+      - name: item_index
+        description: アイテム番号
+        tests:
+          - not_null
+      - name: value
+        description: 差分値の60分間の合計値
+        tests:
+          - not_null
+      - name: value_at
+        description: 計測日時
+        tests:
+          - not_null
+      - name: last_updated_at
+        description: 最終更新日時
+        tests:
+          - not_null
+  - name: tbl_lake_outside_10min
+    description: "外気データを10分単位にまとめたデータを格納するテーブル"
+    config:
+      materialized: incremental
+      unique_key: 'store_id, log_id, item_index, value_at'
+    columns:
+      - name: store_id
+        description: 店舗ID
+        tests:
+          - not_null
+      - name: log_id
+        description: ログID
+        tests:
+          - not_null
+      - name: item_index
+        description: アイテム番号
+        tests:
+          - not_null
+      - name: value
+        description: 計測値の10分間の平均値
+        tests:
+          - not_null
+      - name: value_at
+        description: 計測日時
+        tests:
+          - not_null
+      - name: last_updated_at
+        description: 最終更新日時
+        tests:
+          - not_null
+  - name: tbl_lake_outside_30min
+    description: "外気データを30分単位にまとめたデータを格納するテーブル"
+    config:
+      materialized: incremental
+      unique_key: 'store_id, log_id, item_index, value_at'
+    columns:
+      - name: store_id
+        description: 店舗ID
+        tests:
+          - not_null
+      - name: log_id
+        description: ログID
+        tests:
+          - not_null
+      - name: item_index
+        description: アイテム番号
+        tests:
+          - not_null
+      - name: value
+        description: 計測値の30分間の平均値
+        tests:
+          - not_null
+      - name: value_at
+        description: 計測日時
+        tests:
+          - not_null
+      - name: last_updated_at
+        description: 最終更新日時
+        tests:
+          - not_null
+  - name: tbl_lake_outside_60min
+    description: "外気データを60分単位にまとめたデータを格納するテーブル"
+    config:
+      materialized: incremental
+      unique_key: 'store_id, log_id, item_index, value_at'
+    columns:
+      - name: store_id
+        description: 店舗ID
+        tests:
+          - not_null
+      - name: log_id
+        description: ログID
+        tests:
+          - not_null
+      - name: item_index
+        description: アイテム番号
+        tests:
+          - not_null
+      - name: value
+        description: 計測値の60分間の平均値
+        tests:
+          - not_null
+      - name: value_at
+        description: 計測日時
+        tests:
+          - not_null
+      - name: last_updated_at
+        description: 最終更新日時
+        tests:
+          - not_null
+  - name: tbl_lake_pressure_outside_10min
+    description: "外気差圧データを10分単位にまとめたデータを格納するテーブル"
+    config:
+      materialized: incremental
+      unique_key: 'store_id, log_id, item_index, value_at'
+    columns:
+      - name: store_id
+        description: 店舗ID
+        tests:
+          - not_null
+      - name: log_id
+        description: ログID
+        tests:
+          - not_null
+      - name: item_index
+        description: アイテム番号
+        tests:
+          - not_null
+      - name: value
+        description: 計測値の10分間の平均値
+        tests:
+          - not_null
+      - name: value_at
+        description: 計測日時
+        tests:
+          - not_null
+      - name: last_updated_at
+        description: 最終更新日時
+        tests:
+          - not_null
+  - name: tbl_lake_pressure_outside_30min
+    description: "外気差圧データを30分単位にまとめたデータを格納するテーブル"
+    config:
+      materialized: incremental
+      unique_key: 'store_id, log_id, item_index, value_at'
+    columns:
+      - name: store_id
+        description: 店舗ID
+        tests:
+          - not_null
+      - name: log_id
+        description: ログID
+        tests:
+          - not_null
+      - name: item_index
+        description: アイテム番号
+        tests:
+          - not_null
+      - name: value
+        description: 計測値の30分間の平均値
+        tests:
+          - not_null
+      - name: value_at
+        description: 計測日時
+        tests:
+          - not_null
+      - name: last_updated_at
+        description: 最終更新日時
+        tests:
+          - not_null
+  - name: tbl_lake_pressure_outside_60min
+    description: "外気差圧データを60分単位にまとめたデータを格納するテーブル"
+    config:
+      materialized: incremental
+      unique_key: 'store_id, log_id, item_index, value_at'
+    columns:
+      - name: store_id
+        description: 店舗ID
+        tests:
+          - not_null
+      - name: log_id
+        description: ログID
+        tests:
+          - not_null
+      - name: item_index
+        description: アイテム番号
+        tests:
+          - not_null
+      - name: value
+        description: 計測値の60分間の平均値
+        tests:
+          - not_null
+      - name: value_at
+        description: 計測日時
+        tests:
+          - not_null
+      - name: last_updated_at
+        description: 最終更新日時
+        tests:
+          - not_null
+  - name: tbl_lake_statuslog_1min
+    description: "状態データを1分単位にまとめたデータを格納するテーブル。状態データはリモコン操作されたタイミングで生成される"
+    config:
+      materialized: incremental
+      unique_key: 'store_id, log_id, item_index, value_at'
+    columns:
+      - name: store_id
+        description: 店舗ID
+        tests:
+          - not_null
+      - name: log_id
+        description: ログID
+        tests:
+          - not_null
+      - name: item_index
+        description: アイテム番号
+        tests:
+          - not_null
+      - name: value
+        description: 1分間の最後の変更値
+        tests:
+          - not_null
+      - name: value_at
+        description: 計測日時
+        tests:
+          - not_null
+      - name: last_updated_at
+        description: 最終更新日時
+        tests:
+          - not_null
+  - name: tbl_lake_switchlog_1min
+    description: "発停データを1分単位にまとめたデータを格納するテーブル。発停データはRemcesで操作されたタイミングで生成される"
+    config:
+      materialized: incremental
+      unique_key: 'store_id, log_id, item_index, value_at'
+    columns:
+      - name: store_id
+        description: 店舗ID
+        tests:
+          - not_null
+      - name: log_id
+        description: ログID
+        tests:
+          - not_null
+      - name: item_index
+        description: アイテム番号
+        tests:
+          - not_null
+      - name: value
+        description: 計測値の30分間の平均値
+        tests:
+          - not_null
+      - name: value_at
+        description: 計測日時
+        tests:
+          - not_null
+      - name: last_updated_at
+        description: 最終更新日時
+        tests:
+          - not_null
+  - name: tbl_lake_temp_10min
+    description: "温度データを10分単位にまとめたデータを格納するテーブル"
+    config:
+      materialized: incremental
+      unique_key: 'store_id, log_id, item_index, value_at'
+    columns:
+      - name: store_id
+        description: 店舗ID
+        tests:
+          - not_null
+      - name: log_id
+        description: ログID
+        tests:
+          - not_null
+      - name: item_index
+        description: アイテム番号
+        tests:
+          - not_null
+      - name: value
+        description: 計測値の10分間の平均値
+        tests:
+          - not_null
+      - name: value_at
+        description: 計測日時
+        tests:
+          - not_null
+      - name: last_updated_at
+        description: 最終更新日時
+        tests:
+          - not_null
+  - name: tbl_lake_temp_30min
+    description: "温度データを30分単位にまとめたデータを格納するテーブル"
+    config:
+      materialized: incremental
+      unique_key: 'store_id, log_id, item_index, value_at'
+    columns:
+      - name: store_id
+        description: 店舗ID
+        tests:
+          - not_null
+      - name: log_id
+        description: ログID
+        tests:
+          - not_null
+      - name: item_index
+        description: アイテム番号
+        tests:
+          - not_null
+      - name: value
+        description: 計測値の30分間の平均値
+        tests:
+          - not_null
+      - name: value_at
+        description: 計測日時
+        tests:
+          - not_null
+      - name: last_updated_at
+        description: 最終更新日時
+        tests:
+          - not_null
+  - name: tbl_lake_temp_60min
+    description: "温度データを60分単位にまとめたデータを格納するテーブル"
+    config:
+      materialized: incremental
+      unique_key: 'store_id, log_id, item_index, value_at'
+    columns:
+      - name: store_id
+        description: 店舗ID
+        tests:
+          - not_null
+      - name: log_id
+        description: ログID
+        tests:
+          - not_null
+      - name: item_index
+        description: アイテム番号
+        tests:
+          - not_null
+      - name: value
+        description: 計測値の60分間の平均値
+        tests:
+          - not_null
+      - name: value_at
+        description: 計測日時
+        tests:
+          - not_null
+      - name: last_updated_at
+        description: 最終更新日時
+        tests:
+          - not_null
+  - name: tbl_lake_trend_energy_ac
+    description: "電力量データの差分値データを格納するテーブル。電力量データの元の値は積算値"
+    config:
+      materialized: incremental
+      unique_key: 'store_id, log_id, item_index, value_at'
+    columns:
+      - name: store_id
+        description: 店舗ID
+        tests:
+          - not_null
+      - name: log_id
+        description: ログID
+        tests:
+          - not_null
+      - name: item_index
+        description: アイテム番号
+        tests:
+          - not_null
+      - name: value
+        description: 積算値から差分を求めた値
+        tests:
+          - not_null
+      - name: value_at
+        description: 計測日時
+        tests:
+          - not_null
+      - name: last_updated_at
+        description: 最終更新日時
+        tests:
+          - not_null
+  - name: tbl_lake_trend_energy_ac_30min
+    description: "電力量データを30分単位にまとめたデータを格納するテーブル"
+    config:
+      materialized: incremental
+      unique_key: 'store_id, log_id, item_index, value_at'
+    columns:
+      - name: store_id
+        description: 店舗ID
+        tests:
+          - not_null
+      - name: log_id
+        description: ログID
+        tests:
+          - not_null
+      - name: item_index
+        description: アイテム番号
+        tests:
+          - not_null
+      - name: value
+        description: 差分値の30分間の合計値
+        tests:
+          - not_null
+      - name: value_at
+        description: 計測日時
+        tests:
+          - not_null
+      - name: last_updated_at
+        description: 最終更新日時
+        tests:
+          - not_null
+  - name: tbl_lake_trend_energy_ac_60min
+    description: "電力量データを60分単位にまとめたデータを格納するテーブル"
+    config:
+      materialized: incremental
+      unique_key: 'store_id, log_id, item_index, value_at'
+    columns:
+      - name: store_id
+        description: 店舗ID
+        tests:
+          - not_null
+      - name: log_id
+        description: ログID
+        tests:
+          - not_null
+      - name: item_index
+        description: アイテム番号
+        tests:
+          - not_null
+      - name: value
+        description: 差分値の60分間の合計値
+        tests:
+          - not_null
+      - name: value_at
+        description: 計測日時
+        tests:
+          - not_null
+      - name: last_updated_at
+        description: 最終更新日時
+        tests:
+          - not_null
+  - name: tbl_lake_trend_pressure_10min
+    description: "差圧データを10分単位にまとめたデータを格納するテーブル"
+    config:
+      materialized: incremental
+      unique_key: 'store_id, log_id, item_index, value_at'
+    columns:
+      - name: store_id
+        description: 店舗ID
+        tests:
+          - not_null
+      - name: log_id
+        description: ログID
+        tests:
+          - not_null
+      - name: item_index
+        description: アイテム番号
+        tests:
+          - not_null
+      - name: value
+        description: 計測値の10分間の平均値
+        tests:
+          - not_null
+      - name: value_at
+        description: 計測日時
+        tests:
+          - not_null
+      - name: last_updated_at
+        description: 最終更新日時
+        tests:
+          - not_null
+  - name: tbl_lake_trend_pressure_30min
+    description: "差圧データを30分単位にまとめたデータを格納するテーブル"
+    config:
+      materialized: incremental
+      unique_key: 'store_id, log_id, item_index, value_at'
+    columns:
+      - name: store_id
+        description: 店舗ID
+        tests:
+          - not_null
+      - name: log_id
+        description: ログID
+        tests:
+          - not_null
+      - name: item_index
+        description: アイテム番号
+        tests:
+          - not_null
+      - name: value
+        description: 計測値の30分間の平均値
+        tests:
+          - not_null
+      - name: value_at
+        description: 計測日時
+        tests:
+          - not_null
+      - name: last_updated_at
+        description: 最終更新日時
+        tests:
+          - not_null
+  - name: tbl_lake_trend_pressure_60min
+    description: "差圧データを60分単位にまとめたデータを格納するテーブル"
+    config:
+      materialized: incremental
+      unique_key: 'store_id, log_id, item_index, value_at'
+    columns:
+      - name: store_id
+        description: 店舗ID
+        tests:
+          - not_null
+      - name: log_id
+        description: ログID
+        tests:
+          - not_null
+      - name: item_index
+        description: アイテム番号
+        tests:
+          - not_null
+      - name: value
+        description: 計測値の60分間の平均値
+        tests:
+          - not_null
+      - name: value_at
+        description: 計測日時
+        tests:
+          - not_null
+      - name: last_updated_at
+        description: 最終更新日時
+        tests:
+          - not_null

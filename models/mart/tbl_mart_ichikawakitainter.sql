@@ -3,6 +3,7 @@
 -- depends_on: {{ ref('tbl_lake_co2_60min') }}
 -- depends_on: {{ ref('tbl_lake_energy_ac_30min') }}
 -- depends_on: {{ ref('tbl_lake_energy_ac_60min') }}
+-- depends_on: {{ ref('tbl_lake_energy_pv_10min') }}
 -- depends_on: {{ ref('tbl_lake_energy_pv_30min') }}
 -- depends_on: {{ ref('tbl_lake_energy_pv_60min') }}
 -- depends_on: {{ ref('tbl_lake_humi_10min') }}
@@ -30,26 +31,15 @@
 -- depends_on: {{ ref('tbl_lake_trend_pressure_30min') }}
 -- depends_on: {{ ref('tbl_lake_trend_pressure_60min') }}
 
+{% set db_name = 'db_mart_stg' if target.name == 'stg' else 'db_mart' %}
 {%- set store_id = 57964 -%}
-{%- set r = check_existence_of_table() -%}
-{%- set del_query = make_delete_store_integrate_data_query(store_id) -%}
-{%- set del_query2 = make_delete_synclog_query(store_id) -%}
-{% if r == 0 %}
 {{-
     config(
-        database='db_mart',
+        database=db_name,
         materialized='incremental',
-        post_hook=['{{ make_delete_synclog_query(24679) }}' ]
+        pre_hook=['{{ make_delete_store_integrate_data_query(store_id) }}' ],
+        post_hook=['{{ make_delete_synclog_query(store_id) }}' ]
     )
 }}
-{% else %}
-{{-
-    config(
-        database='db_mart',
-        materialized='incremental',
-        pre_hook=['{{ del_query }}' ],
-        post_hook=['{{ del_query2 }}' ]
-    )
-}}
-{% endif %}
+
 {{ make_store_data_integrate_query(store_id) }}

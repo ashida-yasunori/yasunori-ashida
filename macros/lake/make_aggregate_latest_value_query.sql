@@ -1,6 +1,6 @@
 {#- 設定変更時生成トレンドログ(statuslog, switchlog)の1分単位集約クエリの作成 -#}
-{% macro make_statuslog_switchlog_query(trend) %}
-
+{% macro make_aggregate_latest_value_query(trend) %}
+{% set db_suffix = '_stg' if target.name == 'stg' else '' %}
 {% set query %}
 with query1 as (
 select
@@ -16,7 +16,7 @@ select
      hour(DATEADD(second, 59, t1.value_at)) as value_at_hour,
      minute(DATEADD(second, 59, t1.value_at)) as value_at_min
 from 
-     {{ 'db_raw.public.tbl_raw_' ~ trend ~ ' t1' }}
+     db_raw{{db_suffix}}.public.tbl_raw_{{trend}} t1
 {{ make_inner_join_sync_log(1) -}}
 ),
 
@@ -25,7 +25,7 @@ select
      store_id,
      log_id,
      item_index,
-     max(value_at) value_at_max,
+     max_by(value, value_at) value,
      max(value_at_add_59sec) as value_at_add_59sec
 from 
      query1
@@ -37,7 +37,7 @@ select
     t1.store_id,
     t1.log_id,
     t1.item_index,
-    to_varchar(t2.value) as value,
+    to_varchar(t1.value) as value,
     TIMESTAMP_FROM_PARTS(
        Year(t1.value_at_add_59sec), 
        Month(t1.value_at_add_59sec), 
@@ -49,13 +49,6 @@ select
     to_timestamp(CURRENT_TIMESTAMP()) as last_updated_at
 from 
     query2 t1
-left join query1 t2 on 
-(
-  t1.store_id = t2.store_id and
-  t1.log_id = t2.log_id and 
-  t1.item_index = t2.item_index and
-  t1.value_at_max = t2.value_at
-)
 order by store_id, log_id, item_index, value_at
 {% endset %}
 

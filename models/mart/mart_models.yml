@@ -1,0 +1,7 @@
+version: 2
+
+models:
+  - name: tbl_mart_nodaseto
+    description: "野田瀬戸店の全統合データを格納するmartテーブル（店舗ID=24679）"
+  - name: tbl_mart_ichikawakitainter
+    description: "市川北インター東店の全統合データを格納するmartテーブル（店舗ID=57964）"
