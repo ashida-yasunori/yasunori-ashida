@@ -1,4 +1,4 @@
-{% set db_name = get_lake_db_name() %}
+{% set db_name = 'db_lake_stg' if target.name == 'stg' else 'db_lake' %}
 {{-
     config(
         database=db_name,
