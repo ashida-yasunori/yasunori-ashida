@@ -1,0 +1,58 @@
+version: 2
+
+macros:
+  - name: check_existence_of_table
+    description: "モデル名と同じテーブルが存在しているかどうか確認する"
+    arguments:
+      - name: ""
+  - name: get_store_name
+    description: "店舗IDを指定して、店舗名を取得する"
+    arguments:
+      - name: store_id
+        description: "店舗ID"
+        type: "TEXT"
+  - name: get_table_name
+    description: "トレンドグループ名と集約時間単位を指定して、変換前データが格納されたテーブル名を取得する"
+    arguments:
+      - name: trend
+        description: "トレンドグループ名"
+        type: "TEXT"
+      - name: time_unit
+        description: "集約時間単位。1 or 10 or 30 or 60"
+        type: "NUMBER"
+  - name: get_time_units
+    description: "トレンドグループ名を指定して、何分の集約時間lakeテーブルを作成するのかを取得する"
+    arguments:
+      - name: trend
+        description: "トレンドグループ名"
+        type: "TEXT"
+  - name: get_trend_group_names
+    description: "店舗IDを指定して、tbl_mst_trend_group_pointからグループ名の一覧を取得する"
+    arguments:
+      - name: store_id
+        description: "店舗ID"
+        type: "TEXT"
+  - name: get_trend_points
+    description: "店舗IDを指定して、tbl_mst_trend_group_pointからポイント情報の一覧を取得する"
+    arguments:
+      - name: store_id
+        description: "店舗ID"
+        type: "TEXT"
+  - name: make_delete_store_integrate_data_query
+    description: "データ作成対象日時帯のmartテーブルデータを事前削除するクエリを返す（重複登録の回避目的）"
+    arguments:
+      - name: store_id
+        description: "店舗ID"
+        type: "TEXT"
+  - name: make_delete_synclog_query
+    description: "process_kbn <> 0 以外の店舗の同期ログデータの削除クエリを返す（リカバリ用設定はmartテーブルにデータ登録した時点で不要となるため）"
+    arguments:
+      - name: store_id
+        description: "店舗ID"
+        type: "TEXT"
+  - name: make_store_data_integrate_query
+    description: "店舗別martテーブルにデータ登録するためのクエリを作成して返す。db_commonのテーブル内容でカラム数を動的に変更したクエリを作成"
+    arguments:
+      - name: store_id
+        description: "店舗ID"
+        type: "TEXT"
