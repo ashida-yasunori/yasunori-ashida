@@ -5,7 +5,7 @@
 select
     store_name
 from 
-    db_common{{db_siffix}}.public.tbl_mst_store
+    db_common{{db_suffix}}.public.tbl_mst_store
 where
     store_id = {{ store_id }}
 {% endset %}

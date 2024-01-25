@@ -8,7 +8,7 @@ from
     db_mart{{db_suffix}}.information_schema.tables
 where
     table_schema = 'PUBLIC' and
-    lower(table_name) like '{{ model.name }}'
+    lower(table_name) like lower('{{ model.name }}')
 {% endset %}
 
 {% set results = run_query(query) %}

@@ -20,8 +20,6 @@ where
 {% else %}
 select 0 as col1
 {% endif %}
-
 {% endset %}
-
 {{ return(query) }}
 {% endmacro %}
