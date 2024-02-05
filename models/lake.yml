@@ -1,0 +1,81 @@
+version: 2
+
+sources:
+  - name: lake
+    database: db_lake
+    schema: public
+    tables:
+      - name: tbl_lake_co2_10min
+      - name: tbl_lake_co2_30min
+      - name: tbl_lake_co2_60min
+      - name: tbl_lake_energy_ac
+      - name: tbl_lake_energy_ac_30min
+      - name: tbl_lake_energy_ac_60min
+      - name: tbl_lake_energy_pv_10min
+      - name: tbl_lake_energy_pv_30min
+      - name: tbl_lake_energy_pv_60min
+      - name: tbl_lake_humi_10min
+      - name: tbl_lake_humi_30min
+      - name: tbl_lake_humi_60min
+      - name: tbl_lake_lux_10min
+      - name: tbl_lake_lux_30min
+      - name: tbl_lake_lux_60min
+      - name: tbl_lake_ocs
+      - name: tbl_lake_ocs_30min
+      - name: tbl_lake_ocs_60min
+      - name: tbl_lake_outside_10min
+      - name: tbl_lake_outside_30min
+      - name: tbl_lake_outside_60min
+      - name: tbl_lake_pressure_outside_10min
+      - name: tbl_lake_pressure_outside_30min
+      - name: tbl_lake_pressure_outside_60min
+      - name: tbl_lake_statuslog_1min
+      - name: tbl_lake_switchlog_1min
+      - name: tbl_lake_temp_10min
+      - name: tbl_lake_temp_30min
+      - name: tbl_lake_temp_60min
+      - name: tbl_lake_trend_energy_ac
+      - name: tbl_lake_trend_energy_ac_30min
+      - name: tbl_lake_trend_energy_ac_60min
+      - name: tbl_lake_trend_pressure_10min
+      - name: tbl_lake_trend_pressure_30min
+      - name: tbl_lake_trend_pressure_60min
+  - name: lake_stg
+    database: db_lake_stg
+    schema: public
+    tables:
+      - name: tbl_lake_co2_10min
+      - name: tbl_lake_co2_30min
+      - name: tbl_lake_co2_60min
+      - name: tbl_lake_energy_ac
+      - name: tbl_lake_energy_ac_30min
+      - name: tbl_lake_energy_ac_60min
+      - name: tbl_lake_energy_pv_10min
+      - name: tbl_lake_energy_pv_30min
+      - name: tbl_lake_energy_pv_60min
+      - name: tbl_lake_humi_10min
+      - name: tbl_lake_humi_30min
+      - name: tbl_lake_humi_60min
+      - name: tbl_lake_lux_10min
+      - name: tbl_lake_lux_30min
+      - name: tbl_lake_lux_60min
+      - name: tbl_lake_ocs
+      - name: tbl_lake_ocs_30min
+      - name: tbl_lake_ocs_60min
+      - name: tbl_lake_outside_10min
+      - name: tbl_lake_outside_30min
+      - name: tbl_lake_outside_60min
+      - name: tbl_lake_pressure_outside_10min
+      - name: tbl_lake_pressure_outside_30min
+      - name: tbl_lake_pressure_outside_60min
+      - name: tbl_lake_statuslog_1min
+      - name: tbl_lake_switchlog_1min
+      - name: tbl_lake_temp_10min
+      - name: tbl_lake_temp_30min
+      - name: tbl_lake_temp_60min
+      - name: tbl_lake_trend_energy_ac
+      - name: tbl_lake_trend_energy_ac_30min
+      - name: tbl_lake_trend_energy_ac_60min
+      - name: tbl_lake_trend_pressure_10min
+      - name: tbl_lake_trend_pressure_30min
+      - name: tbl_lake_trend_pressure_60min

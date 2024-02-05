@@ -1,0 +1,37 @@
+version: 2
+
+sources:
+  - name: raw
+    database: db_raw
+    schema: public
+    tables:
+      - name: tbl_raw_co2
+      - name: tbl_raw_energy_ac
+      - name: tbl_raw_energy_pv
+      - name: tbl_raw_humi
+      - name: tbl_raw_lux
+      - name: tbl_raw_ocs
+      - name: tbl_raw_outside
+      - name: tbl_raw_pressure_outside
+      - name: tbl_raw_statuslog
+      - name: tbl_raw_switchlog
+      - name: tbl_raw_temp
+      - name: tbl_raw_trend_energy_ac
+      - name: tbl_raw_trend_pressure
+  - name: raw_stg
+    database: db_raw_stg
+    schema: public
+    tables:
+      - name: tbl_raw_co2
+      - name: tbl_raw_energy_ac
+      - name: tbl_raw_energy_pv
+      - name: tbl_raw_humi
+      - name: tbl_raw_lux
+      - name: tbl_raw_ocs
+      - name: tbl_raw_outside
+      - name: tbl_raw_pressure_outside
+      - name: tbl_raw_statuslog
+      - name: tbl_raw_switchlog
+      - name: tbl_raw_temp
+      - name: tbl_raw_trend_energy_ac
+      - name: tbl_raw_trend_pressure

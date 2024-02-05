@@ -10,8 +10,9 @@ with query1 as (
      t1.value,
      t1.value_at,
      DATEADD(minute, -1, t1.value_at) as value_at_past_1min
- from 
-       db_raw{{db_suffix}}.public.tbl_raw_{{ trend }} t1
+ from
+     {{ source('raw' ~ db_suffix, 'tbl_raw_' ~ trend) }} t1
+     -- db_raw{{db_suffix}}.public.tbl_raw_{{ trend }} t1
 {{ make_inner_join_sync_log(time_unit) -}}
 ),
 
