@@ -38,7 +38,7 @@ select
     {%- for p in points %}
         {%- set time_units = get_time_units(p[0]) -%}
         {%- for time in time_units %}
-    max(CASE WHEN log_id = {{p[1]}} and item_index = {{p[2]}} and time = {{time}} THEN {{cast_type}}value) ELSE NULL END AS "{{p[3]}}_{{time}}min_{{store_name}}"
+    max(CASE WHEN log_id = {{p[1]}} and item_index = {{p[2]}} and time = {{time}} THEN {{cast_type}}value ELSE NULL END) AS "{{p[3]}}_{{time}}min_{{store_name}}"
             {%- if not loop.last %}, 
             {%- endif %}
         {%- endfor %}
