@@ -11,7 +11,7 @@ with integration as (
     {%- for group in groups %}
         {% set time_units = get_time_units(group[0]) %}
         {%- for time in time_units %}
-            (select t1.store_id, t1.log_id, t1.item_index, to_varchar(t1.value) as value, t1.value_at, {{ time }} as time 
+            (select t1.store_id, t1.log_id, t1.item_index, t1.value, t1.value_at, {{ time }} as time 
             {%- set tbl_name = get_table_name(group[0], time) %}
             from {{ tbl_name }} t1
             inner join (select store_id, log_last_min_at, log_last_max_at
