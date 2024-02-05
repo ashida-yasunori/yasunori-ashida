@@ -11,7 +11,8 @@ with query1 as (
      t1.value_at,
      DATEADD(minute, -1, t1.value_at) as value_at_past_1min
  from 
-     db_lake{{db_suffix}}.public.tbl_lake_{{ trend }} t1
+     {{ source('lake' ~ db_suffix, 'tbl_lake_' ~ trend) }} t1
+     -- db_lake{{db_suffix}}.public.tbl_lake_{{ trend }} t1
 {{ make_inner_join_sync_log(time_unit) -}}
 ),
 

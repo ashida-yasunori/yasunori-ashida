@@ -33,5 +33,12 @@ clean-targets:         # directories to be removed by `dbt clean`
 # using the `{{ config(...) }}` macro.
 models:
   my_new_project:
-    # Applies to all files under models/example/
-    +materialized: table
+    lake:
+      tags: ['prod', 'stg']
+    mart:
+      tags: ['prod']
+      on_schema_change: "append_new_columns"
+    mart_stg:
+      tags: ['stg']
+
+

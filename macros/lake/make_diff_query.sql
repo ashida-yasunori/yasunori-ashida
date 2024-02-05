@@ -10,7 +10,8 @@ select
      t1.value - LAG(t1.value, 1, t1.value) OVER (PARTITION BY t1.store_id, t1.log_id, t1.item_index ORDER BY t1.value_at) AS value,
      t1.value_at
 from 
-     db_raw{{db_suffix}}.public.tbl_raw_{{trend}} t1
+     {{ source('raw' ~ db_suffix, 'tbl_raw_' ~ trend) }} t1
+     -- db_raw{{db_suffix}}.public.tbl_raw_{{trend}} t1
 {{ make_inner_join_sync_log(time_unit, -120) -}}
 ),
 
@@ -26,7 +27,7 @@ from
 {{ make_inner_join_sync_log(time_unit) -}}
 where
      t1.value_at != (select min(value_at) 
-                     from db_raw{{db_suffix}}.public.tbl_raw_{{trend}}
+                     from {{ source('raw' ~ db_suffix, 'tbl_raw_' ~ trend) }}
                      where store_id = t1.store_id and
                            log_id = t1.log_id and 
                            item_index = t1.item_index)

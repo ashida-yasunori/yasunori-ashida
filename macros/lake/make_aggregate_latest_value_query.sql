@@ -7,7 +7,10 @@ select
      t1.store_id,
      t1.log_id,
      t1.item_index,
-     t1.value,
+     case when t1.value = 'true' then 1
+          when t1.value = 'false' then 0
+          else t1.value
+     end as value,
      t1.value_at,
      DATEADD(second, 59, t1.value_at) as value_at_add_59sec,
      year(DATEADD(second, 59, t1.value_at)) as value_at_year,
@@ -16,7 +19,8 @@ select
      hour(DATEADD(second, 59, t1.value_at)) as value_at_hour,
      minute(DATEADD(second, 59, t1.value_at)) as value_at_min
 from 
-     db_raw{{db_suffix}}.public.tbl_raw_{{trend}} t1
+     {{ source('raw' ~ db_suffix, 'tbl_raw_' ~ trend) }} t1
+     -- db_raw{{db_suffix}}.public.tbl_raw_{{trend}} t1
 {{ make_inner_join_sync_log(1) -}}
 ),
 
@@ -37,7 +41,7 @@ select
     t1.store_id,
     t1.log_id,
     t1.item_index,
-    to_varchar(t1.value) as value,
+    to_double(t1.value) as value,
     TIMESTAMP_FROM_PARTS(
        Year(t1.value_at_add_59sec), 
        Month(t1.value_at_add_59sec), 
