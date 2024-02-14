@@ -1,0 +1,17 @@
+version: 2
+
+sources:
+  - name: common
+    database: db_common
+    schema: public
+    tables:
+      - name: tbl_mst_store
+      - name: tbl_mst_trend_group_point
+      - name: tbl_sync_log
+  - name: common_stg
+    database: db_common_stg
+    schema: public
+    tables:
+      - name: tbl_mst_store
+      - name: tbl_mst_trend_group_point
+      - name: tbl_sync_log
