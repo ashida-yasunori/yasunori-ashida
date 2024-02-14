@@ -5,7 +5,8 @@
 select distinct
     replace(lower(group_name), 'trend.')
 from 
-    db_common{{db_suffix}}.public.tbl_mst_trend_group_point
+    {{ source('common' ~ db_suffix, 'tbl_mst_trend_group_point') }}
+    -- db_common{{db_suffix}}.public.tbl_mst_trend_group_point
 where
     store_id = {{ store_id }}
 order by 1

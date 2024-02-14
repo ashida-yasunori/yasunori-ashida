@@ -2,7 +2,9 @@
 {% macro make_inner_join_sync_log(time_unit, minus_min=0) %}
 {% set db_suffix = '_stg' if target.name == 'stg' else '' %}
 {% set join_query -%}
-inner join db_common{{db_suffix}}.public.tbl_sync_log t2 on (
+inner join 
+    {{ source('common' ~ db_suffix, 'tbl_sync_log') }} t2 on (
+    -- db_common{{db_suffix}}.public.tbl_sync_log t2 on (
     t2.store_id = t1.store_id and 
     t2.log_id = t1.log_id and 
     ({%- if minus_min != 0 -%}DATEADD(minute, {{minus_min}}, t2.log_last_min_at){%- else -%}t2.log_last_min_at {%- endif %} <= t1.value_at and t1.value_at <= t2.log_last_max_at) and 
