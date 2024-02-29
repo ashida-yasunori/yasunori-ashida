@@ -8,6 +8,7 @@ sources:
       - name: tbl_mst_store
       - name: tbl_mst_trend_group_point
       - name: tbl_sync_log
+      - name: tbl_mst_value_range
   - name: common_stg
     database: db_common_stg
     schema: public
@@ -15,3 +16,4 @@ sources:
       - name: tbl_mst_store
       - name: tbl_mst_trend_group_point
       - name: tbl_sync_log
+      - name: tbl_mst_value_range

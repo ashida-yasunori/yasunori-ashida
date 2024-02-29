@@ -19,7 +19,7 @@ with integration as (
                         from {{ source('common' ~ db_suffix, 'tbl_sync_log') }}) t2 on (
                         -- db_common{{db_suffix}}.public.tbl_sync_log) t2 on (
                         ( t2.store_id = t1.store_id and (t2.log_last_min_at <= t1.value_at and t1.value_at <= t2.log_last_max_at)))
-            where t1.store_id = {{ store_id }})
+            where t1.store_id = '{{ store_id }}')
             {%- if not loop.last %}
             union 
             {%- endif -%}

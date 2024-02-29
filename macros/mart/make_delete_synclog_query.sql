@@ -4,7 +4,7 @@
 {% set query %}
 delete from {{ source('common' ~ db_suffix, 'tbl_sync_log') }}
 -- db_common{{db_suffix}}.public.tbl_sync_log 
-where store_id = {{ store_id }} and process_kbn <> 0
+where store_id = '{{ store_id }}' and process_kbn <> 0
 {% endset %}
 {{ return(query) }}
 {% endmacro %}

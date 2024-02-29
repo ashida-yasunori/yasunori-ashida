@@ -1,3 +1,4 @@
+-- depends_on: {{ ref('tbl_raw_pressure_outside') }}
 {% set db_name = 'db_lake_stg' if target.name == 'stg' else 'db_lake' %}
 {{-
     config(

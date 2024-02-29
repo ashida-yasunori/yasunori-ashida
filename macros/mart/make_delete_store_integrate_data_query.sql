@@ -13,7 +13,7 @@ using (
     from 
         db_common{{db_suffix}}.public.tbl_sync_log
     where 
-        store_id = {{ store_id }}
+        store_id = '{{ store_id }}'
     ) as t2 
 where 
     t2.log_last_min_at <= t1.value_at and t1.value_at <= t2.log_last_max_at
