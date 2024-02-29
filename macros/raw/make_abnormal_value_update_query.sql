@@ -1,8 +1,8 @@
-{#- 1分単位トレンドログ（温度、湿度、照度など）の時間単位集約クエリの作成 -#}
+{#- TBL_MST_VALUE_RANGEから異常値のデータを取得しnullに置き換えるクエリの作成 -#}
 {% macro make_abnormal_value_update_query(trend) %}
--- 実行時のTarget nameからdb名を選ぶ
 {% set db_suffix = '_stg' if target.name == 'stg' else '' %}
 {% set query %}
+-- depends_on: {{ ref('tbl_mart_abnormal_value') }}
 select
 	t1.store_id, t1.log_id, t1.item_index, t1.unit, t1.aggregation_mode, null as value, t1.value_at, to_timestamp(CURRENT_TIMESTAMP()) as created_at
 from {{ source('mart' ~ db_suffix, 'tbl_mart_abnormal_value') }} t1

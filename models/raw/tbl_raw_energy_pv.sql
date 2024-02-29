@@ -1,4 +1,3 @@
--- depends_on: {{ ref('tbl_mart_abnormal_value') }}
 {%- set db_name = 'db_raw_stg' if target.name == 'stg' else 'db_raw' -%}
 {{-
     config(
@@ -8,5 +7,5 @@
     )
 -}}
 
-{#- CO2のクエリを作成 -#}
+{#- Energy_PVのクエリを作成 -#}
 {{- make_abnormal_value_update_query('Energy_PV') -}}

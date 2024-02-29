@@ -1,4 +1,3 @@
--- depends_on: {{ ref('tbl_mart_abnormal_value') }}
 {%- set db_name = 'db_raw_stg' if target.name == 'stg' else 'db_raw' -%}
 {{-
     config(
