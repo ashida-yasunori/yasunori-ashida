@@ -8,4 +8,4 @@
 -}}
 
 {#- Pressure_Outsideのクエリを作成 -#}
-{{- make_abnormal_value_update_query('Pressure_Outside') -}}
+{{- make_abnormal_value_update_query('pressure_outside') -}}

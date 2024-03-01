@@ -8,4 +8,4 @@
 -}}
 
 {#- Energy_PVのクエリを作成 -#}
-{{- make_abnormal_value_update_query('Energy_PV') -}}
+{{- make_abnormal_value_update_query('energy_pv') -}}

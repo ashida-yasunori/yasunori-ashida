@@ -8,4 +8,4 @@
 -}}
 
 {#- Tempのクエリを作成 -#}
-{{- make_abnormal_value_update_query('Temp') -}}
+{{- make_abnormal_value_update_query('temp') -}}

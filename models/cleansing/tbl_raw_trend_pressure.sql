@@ -8,4 +8,4 @@
 -}}
 
 {#- Trend_Pressureのクエリを作成 -#}
-{{- make_abnormal_value_update_query('Trend_Pressure') -}}
+{{- make_abnormal_value_update_query('trend_pressure') -}}

@@ -8,4 +8,4 @@
 -}}
 
 {#- Luxのクエリを作成 -#}
-{{- make_abnormal_value_update_query('Lux') -}}
+{{- make_abnormal_value_update_query('lux') -}}

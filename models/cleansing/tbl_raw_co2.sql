@@ -8,4 +8,4 @@
 -}}
 
 {#- CO2のクエリを作成 -#}
-{{- make_abnormal_value_update_query('CO2') -}}
+{{- make_abnormal_value_update_query('co2') -}}

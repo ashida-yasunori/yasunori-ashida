@@ -8,4 +8,4 @@
 -}}
 
 {#- Outsideのクエリを作成 -#}
-{{- make_abnormal_value_update_query('Outside') -}}
+{{- make_abnormal_value_update_query('outside') -}}

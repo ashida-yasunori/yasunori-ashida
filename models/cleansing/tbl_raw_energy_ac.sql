@@ -8,4 +8,4 @@
 -}}
 
 {#- Energy_ACのクエリを作成 -#}
-{{- make_abnormal_value_update_query('Energy_AC') -}}
+{{- make_abnormal_value_update_query('energy_ac') -}}

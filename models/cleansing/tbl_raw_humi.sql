@@ -8,4 +8,4 @@
 -}}
 
 {#- Humiのクエリを作成 -#}
-{{- make_abnormal_value_update_query('Humi') -}}
+{{- make_abnormal_value_update_query('humi') -}}

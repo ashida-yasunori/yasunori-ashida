@@ -8,4 +8,4 @@
 -}}
 
 {#- StatusLogのクエリを作成 -#}
-{{- make_abnormal_value_update_query('StatusLog') -}}
+{{- make_abnormal_value_update_query('statuslog') -}}

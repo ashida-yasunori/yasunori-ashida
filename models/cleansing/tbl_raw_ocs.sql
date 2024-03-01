@@ -8,4 +8,4 @@
 -}}
 
 {#- OCSのクエリを作成 -#}
-{{- make_abnormal_value_update_query('OCS') -}}
+{{- make_abnormal_value_update_query('ocs') -}}
