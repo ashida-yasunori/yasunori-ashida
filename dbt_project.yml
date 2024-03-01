@@ -42,5 +42,6 @@ models:
       tags: ['stg']
     cleansing:
       tags: ['cleansing']
+      merge_update_columns: ['value']
 
 
