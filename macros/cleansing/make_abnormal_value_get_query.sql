@@ -1,9 +1,8 @@
 {# RAWテーブル異常値データ取得用クエリの作成 #}
 {% macro make_abnormal_value_get_query() %}
 {%- set db_name = 'db_mart_stg' if target.name == 'stg' else 'db_mart' -%}
-{%- set store_id = 24679 -%}
 {% set query %}
-{%- set trend_points = get_trend_group_names(store_id) -%}
+{%- set trend_points = get_trend_group_names() -%}
 {%- for trend_point in trend_points -%}
 (
 select
