@@ -3,7 +3,8 @@
     config(
         database=db_name,
         materialized="incremental",
-        unique_key = ['store_id', 'log_id', 'item_index', 'value_at']
+        unique_key = ['store_id', 'log_id', 'item_index', 'value_at'],
+        merge_update_columns = ['value']
     )
 -}}
 
