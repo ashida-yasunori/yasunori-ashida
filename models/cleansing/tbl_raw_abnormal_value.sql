@@ -1,5 +1,5 @@
 {# RAWテーブル異常値データ取得用クエリの作成 #}
-{%- set db_name = 'db_mart_stg' if target.name == 'stg' else 'db_mart' -%}
+{%- set db_name = 'db_raw_stg' if target.name == 'stg' else 'db_raw' -%}
 {{-
     config(
         database=db_name,

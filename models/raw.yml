@@ -18,6 +18,7 @@ sources:
       - name: tbl_raw_temp
       - name: tbl_raw_trend_energy_ac
       - name: tbl_raw_trend_pressure
+      - name: tbl_raw_abnormal_value
   - name: raw_stg
     database: db_raw_stg
     schema: public
@@ -35,3 +36,4 @@ sources:
       - name: tbl_raw_temp
       - name: tbl_raw_trend_energy_ac
       - name: tbl_raw_trend_pressure
+      - name: tbl_raw_abnormal_value

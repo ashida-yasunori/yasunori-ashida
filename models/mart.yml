@@ -4,10 +4,6 @@ sources:
   - name: mart
     database: db_mart
     schema: public
-    tables:
-      - name: tbl_mart_abnormal_value
   - name: mart_stg
     database: db_mart_stg
     schema: public
-    tables:
-      - name: tbl_mart_abnormal_value
