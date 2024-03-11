@@ -40,5 +40,8 @@ models:
       on_schema_change: "append_new_columns"
     mart_stg:
       tags: ['stg']
+    cleansing:
+      tags: ['cleansing']
+      merge_update_columns: ['value']
 
 

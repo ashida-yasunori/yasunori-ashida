@@ -1,0 +1,9 @@
+version: 2
+
+sources:
+  - name: mart
+    database: db_mart
+    schema: public
+  - name: mart_stg
+    database: db_mart_stg
+    schema: public

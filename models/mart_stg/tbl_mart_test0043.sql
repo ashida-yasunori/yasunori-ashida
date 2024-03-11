@@ -30,14 +30,14 @@
 -- depends_on: {{ ref('tbl_lake_trend_pressure_10min') }}
 -- depends_on: {{ ref('tbl_lake_trend_pressure_30min') }}
 -- depends_on: {{ ref('tbl_lake_trend_pressure_60min') }}
-{% set db_name = 'db_mart_stg' if target.name == 'stg' else 'db_mart' %}
-{%- set store_id = 10000 -%}
+{%- set db_name = 'db_mart_stg' if target.name == 'stg' else 'db_mart' -%}
+{%- set store_id = '430000' -%}
 {{-
     config(
         database=db_name,
         materialized='incremental',
-        pre_hook=['{{ make_delete_store_integrate_data_query(10000) }}' ],
-        post_hook=['{{ make_delete_synclog_query(10000) }}' ]
+        pre_hook=['{{ make_delete_store_integrate_data_query("430000") }}' ],
+        post_hook=['{{ make_delete_synclog_query("430000") }}' ]
     )
 }}
 
