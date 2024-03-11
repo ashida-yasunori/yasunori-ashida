@@ -13,7 +13,7 @@ with integration as (
         {%- for time in time_units %}
             (select t1.store_id, t1.log_id, t1.item_index, t1.value, t1.value_at, {{ time }} as time 
             {%- set tbl_name = get_table_name(group[0], time) %}
-            from {{ source(tbl_name[0] ~ db_suffix, tbl_name[1]) }} t1
+            from {{ source(tbl_name[0], tbl_name[1]) }} t1
             inner join (select store_id, log_last_min_at, log_last_max_at
                         from {{ source('common' ~ db_suffix, 'tbl_sync_log') }}) t2 on (
                         ( t2.store_id = t1.store_id and (t2.log_last_min_at <= t1.value_at and t1.value_at <= t2.log_last_max_at)))
