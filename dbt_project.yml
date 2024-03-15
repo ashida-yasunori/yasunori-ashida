@@ -42,7 +42,7 @@ models:
       tags: ['mart_stg']
       test01-02:
         tags: ['stg01-02']
-      test01-10:
+      test03-10:
         tags: ['stg03-10']
       test11-20:
         tags: ['stg11-20']
