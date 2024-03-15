@@ -40,8 +40,10 @@ models:
       on_schema_change: "append_new_columns"
     mart_stg:
       tags: ['mart_stg']
+      test01-2:
+        tags: ['stg01-02']
       test01-10:
-        tags: ['stg01-10']
+        tags: ['stg03-10']
       test11-20:
         tags: ['stg11-20']
     cleansing:
