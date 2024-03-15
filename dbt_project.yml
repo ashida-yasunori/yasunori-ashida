@@ -40,6 +40,10 @@ models:
       on_schema_change: "append_new_columns"
     mart_stg:
       tags: ['stg']
+      test01-10:
+        tags: ['stg01-10']
+      test11-20:
+        tags: ['stg11-20']
     cleansing:
       tags: ['cleansing']
       merge_update_columns: ['value']

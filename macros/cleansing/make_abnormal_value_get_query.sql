@@ -17,7 +17,7 @@ inner join {{ source('common' ~ db_suffix, 'tbl_mst_trend_group_point') }} t3 on
 inner join {{ source('common' ~ db_suffix, 'tbl_mst_value_range') }} t4 on (
     t3.value_type = t4.value_type
 )
-where (t4.min_value > t1.value OR t1.value > t4.max_value)
+where (t4.min_value > t1.value OR t1.value > t4.max_value) OR t1.value like '%e%'
 order by store_id, log_id, item_index, value_at
 )
 {%- if not loop.last %}
