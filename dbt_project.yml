@@ -34,12 +34,15 @@ clean-targets:         # directories to be removed by `dbt clean`
 models:
   my_new_project:
     lake:
-      tags: ['prod', 'lake_stg']
+      tags: ['prod_lake', 'stg_lake']
     mart:
-      tags: ['prod']
+      tags: ['prod_mart']
+      on_schema_change: "append_new_columns"
+    mart_past:
+      tags: ['prod_mart_past']
       on_schema_change: "append_new_columns"
     mart_stg:
-      tags: ['mart_stg']
+      tags: ['stg_mart']
       test01-02:
         tags: ['stg01-02']
       test03-10:
